@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next muse" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="阅读指南：配置树莓派需要有一定的Linux基础。熟悉树莓派的朋友可以跳过前两篇文章，从第三篇——挂载外置硬盘开始。 0. 关于树莓派 树莓派（英语：Raspberry Pi）其实就是一个拥有完整功能的电脑主机——小小的一个电路板上集成了CPU、显卡（集成在CPU里）、内存、硬盘（存储卡接口）、HDMI显示接口、USB接口、有线网络接口、音频接口，第三代产品甚至还有蓝牙和Wi-Fi。 基于树莓派的家">
+<meta name="keywords" content="Raspberry Pi,家用服务器,NAS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建基于树莓派的家用服务器&#x2F;NAS(1)——需求和硬件">
+<meta property="og:url" content="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-1/index.html">
+<meta property="og:site_name" content="Shellman">
+<meta property="og:description" content="阅读指南：配置树莓派需要有一定的Linux基础。熟悉树莓派的朋友可以跳过前两篇文章，从第三篇——挂载外置硬盘开始。 0. 关于树莓派 树莓派（英语：Raspberry Pi）其实就是一个拥有完整功能的电脑主机——小小的一个电路板上集成了CPU、显卡（集成在CPU里）、内存、硬盘（存储卡接口）、HDMI显示接口、USB接口、有线网络接口、音频接口，第三代产品甚至还有蓝牙和Wi-Fi。 基于树莓派的家">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-1/raspberry-1.jpg">
+<meta property="og:image" content="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-1/my-devices-1.jpg">
+<meta property="og:updated_time" content="2018-11-21T15:55:58.978Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="搭建基于树莓派的家用服务器&#x2F;NAS(1)——需求和硬件">
+<meta name="twitter:description" content="阅读指南：配置树莓派需要有一定的Linux基础。熟悉树莓派的朋友可以跳过前两篇文章，从第三篇——挂载外置硬盘开始。 0. 关于树莓派 树莓派（英语：Raspberry Pi）其实就是一个拥有完整功能的电脑主机——小小的一个电路板上集成了CPU、显卡（集成在CPU里）、内存、硬盘（存储卡接口）、HDMI显示接口、USB接口、有线网络接口、音频接口，第三代产品甚至还有蓝牙和Wi-Fi。 基于树莓派的家">
+<meta name="twitter:image" content="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-1/raspberry-1.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-1/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>搭建基于树莓派的家用服务器/NAS(1)——需求和硬件 | Shellman</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122715583-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-122715583-1');
+</script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shellman</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shellman">
+      <meta itemprop="description" content="年少不惧江湖老，放歌四海任逍遥。<br/>未解前路多少事，欲与青天试比高。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shellman">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">搭建基于树莓派的家用服务器/NAS(1)——需求和硬件
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-03 00:00:00" itemprop="dateCreated datePublished" datetime="2018-06-03T00:00:00+08:00">2018-06-03</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div class="note danger"><p>阅读指南：</p><ol><li>配置树莓派需要有一定的Linux基础。</li><li>熟悉树莓派的朋友可以跳过前两篇文章，从<a href="/articles/build-a-home-server-based-on-raspberry-pi-3/" title="第三篇——挂载外置硬盘">第三篇——挂载外置硬盘</a>开始。</li></ol></div>
+<h3 id="0-关于树莓派"><a href="#0-关于树莓派" class="headerlink" title="0. 关于树莓派"></a>0. 关于树莓派</h3><img src="/articles/build-a-home-server-based-on-raspberry-pi-1/raspberry-1.jpg" title="树莓派">
+<div class="note info"><p><strong>树莓派（英语：Raspberry Pi）</strong>其实就是一个拥有完整功能的电脑主机——小小的一个电路板上集成了CPU、显卡（集成在CPU里）、内存、硬盘（存储卡接口）、HDMI显示接口、USB接口、有线网络接口、音频接口，第三代产品甚至还有蓝牙和Wi-Fi。</p></div>
+<p>基于树莓派的家用服务器有以下优点：</p>
+<ul>
+<li>成本小——成本只要几百块钱</li>
+<li>功耗小——普通的手机充电器就能够供电</li>
+<li>体积小——巴掌大小，完全不占空间</li>
+<li>噪音小——不需要散热风扇，几乎没有噪音</li>
+</ul>
+<h3 id="1-需求"><a href="#1-需求" class="headerlink" title="1. 需求"></a>1. 需求</h3><p>我的需求主要来自于以下几点：<br><a id="more"></a> </p>
+<ul>
+<li>365天24小时不间断的运行</li>
+<li>BT下载服务</li>
+<li>数据同步存储（私有云盘）</li>
+<li>文件共享服务</li>
+<li>4K高清视频数据传输服务——配合智能设备播放高清电影，如Apple TV、小米盒子、智能电视等</li>
+</ul>
+<h3 id="2-硬件"><a href="#2-硬件" class="headerlink" title="2. 硬件"></a>2. 硬件</h3><p>为了满足需求，建议硬件如下：</p>
+<h4 id="2-1-树莓派"><a href="#2-1-树莓派" class="headerlink" title="2.1. 树莓派"></a>2.1. 树莓派</h4><p>使用2018年最新的树莓派3B+，这样有线网络理论带宽可以达到300Mbps。我以前用的树莓派2B理论带宽只有100Mbps，因为有协议损耗等等，实际使用的时候不到90M，看有些码率较高的4K电影时会卡顿。</p>
+<h4 id="2-2-TF存储卡"><a href="#2-2-TF存储卡" class="headerlink" title="2.2. TF存储卡"></a>2.2. TF存储卡</h4><p>TF卡用作树莓派的系统盘，推荐选择大品牌的高速卡保障稳定性。为了方便以后扩展功能，最好不要低于16G的容量。<br><div class="note warning"><p>树莓派也可以用外置硬盘做系统盘引导，但是建议新手还是继续用TF卡做系统盘，这样就可以把系统盘和数据盘硬件分割。以后要是系统出现问题，只需要修复或重装TF卡，不会波及到外置硬盘，降低数据损失的风险。</p></div></p>
+<h4 id="2-3-硬盘和硬盘盒"><a href="#2-3-硬盘和硬盘盒" class="headerlink" title="2.3. 硬盘和硬盘盒"></a>2.3. 硬盘和硬盘盒</h4><p>外置硬盘作为数据盘存储文件。选择有独立供电的硬盘盒和台式机硬盘，千万不要用便携式移动硬盘（血与泪的教训）。对价格敏感的话可以考虑5400转的监控级硬盘，因为树莓派的USB带宽不高，所以即使是低速硬盘的速度也完全能达到带宽上限。<br>硬盘盒还可以选择多盘位的，这样的话存储的扩展性就非常强了。有些高端硬盘柜甚至支持RAID，硬件层面防止数据丢失。</p>
+<h4 id="2-4-电源"><a href="#2-4-电源" class="headerlink" title="2.4. 电源"></a>2.4. 电源</h4><p>树莓派的电源接口和许多Android手机一样是MicroUSB。官方推荐的是5V/2.5A电源，不过若家里有闲置的手机2A电流的充电器也可以使用。</p>
+<h4 id="2-5-其它设备"><a href="#2-5-其它设备" class="headerlink" title="2.5. 其它设备"></a>2.5. 其它设备</h4><p>路由器要有千兆有线局域网，最好能有ddns方便外网访问。</p>
+<h4 id="2-6-我的硬件情况"><a href="#2-6-我的硬件情况" class="headerlink" title="2.6. 我的硬件情况"></a>2.6. 我的硬件情况</h4><ul>
+<li>树莓派——RS版的3B+。</li>
+<li>TF卡——三星EVO Plus 32G。</li>
+<li>硬盘盒——某品牌的3.5寸硬盘盒，USB3.0接口（其实2.0也够用），独立供电。</li>
+<li>硬盘——淘宝买的的日立8T硬盘。这玩意竟然只要¥1100多，应该不是正规渠道的货，但我测试了一下各方面都还可以。</li>
+<li>电源——闲置的iPad原装充电器（2.1A）。</li>
+</ul>
+<p>不算硬盘的话这一套成本¥350左右，与其它方案动辄两三千的价格相比是非常的便宜了。最后附上一张我的这套系统全家福照片：<br><img src="/articles/build-a-home-server-based-on-raspberry-pi-1/my-devices-1.jpg" title="树莓派"></p>
+<hr>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/raspberry-pi/" rel="tag"># Raspberry Pi</a>
+          
+            <a href="/tags/家用服务器/" rel="tag"># 家用服务器</a>
+          
+            <a href="/tags/nas/" rel="tag"># NAS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/articles/build-a-home-server-based-on-raspberry-pi-2/" rel="prev" title="搭建基于树莓派的家用服务器/NAS(2)——安装系统">
+                搭建基于树莓派的家用服务器/NAS(2)——安装系统 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Shellman</p>
+              <p class="site-description motion-element" itemprop="description">年少不惧江湖老，放歌四海任逍遥。<br>未解前路多少事，欲与青天试比高。</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/shellmanme" title="GitHub &rarr; https://github.com/shellmanme" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:shellmanme@gmail.com" title="E-Mail &rarr; mailto:shellmanme@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-关于树莓派"><span class="nav-text">0. 关于树莓派</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-需求"><span class="nav-text">1. 需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-硬件"><span class="nav-text">2. 硬件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-树莓派"><span class="nav-text">2.1. 树莓派</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-TF存储卡"><span class="nav-text">2.2. TF存储卡</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-硬盘和硬盘盒"><span class="nav-text">2.3. 硬盘和硬盘盒</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-电源"><span class="nav-text">2.4. 电源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-其它设备"><span class="nav-text">2.5. 其它设备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-我的硬件情况"><span class="nav-text">2.6. 我的硬件情况</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"><a href="/">shellman.me</a></span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.5.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

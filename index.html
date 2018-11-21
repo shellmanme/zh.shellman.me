@@ -1,0 +1,1819 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next muse" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="年少不惧江湖老，放歌四海任逍遥。未解前路多少事，欲与青天试比高。">
+<meta name="keywords" content="js go raspberry pi nas home server">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Shellman">
+<meta property="og:url" content="https://zh.shellman.me/index.html">
+<meta property="og:site_name" content="Shellman">
+<meta property="og:description" content="年少不惧江湖老，放歌四海任逍遥。未解前路多少事，欲与青天试比高。">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shellman">
+<meta name="twitter:description" content="年少不惧江湖老，放歌四海任逍遥。未解前路多少事，欲与青天试比高。">
+
+
+
+
+
+
+  <link rel="canonical" href="https://zh.shellman.me/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Shellman</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122715583-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-122715583-1');
+</script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shellman</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home menu-item-active">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zh.shellman.me/articles/mongo-go-driver-demo/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shellman">
+      <meta itemprop="description" content="年少不惧江湖老，放歌四海任逍遥。<br/>未解前路多少事，欲与青天试比高。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shellman">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/articles/mongo-go-driver-demo/" class="post-title-link" itemprop="https://zh.shellman.me/index.html">MongoDB官方推出的Go驱动库“mongo-go-driver”快速教程</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-22 00:00:00" itemprop="dateCreated datePublished" datetime="2018-11-22T00:00:00+08:00">2018-11-22</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="0-关于“mongo-go-driver”"><a href="#0-关于“mongo-go-driver”" class="headerlink" title="0. 关于“mongo-go-driver”"></a>0. 关于“mongo-go-driver”</h3><p>MongoDB官方一直缺乏官方的Go驱动库，仅做了社区驱动的推荐：<a href="https://docs.mongodb.com/ecosystem/drivers/community-supported-drivers/" target="_blank" rel="noopener">Community Supported Drivers Reference</a>。这其中Go驱动推荐的是<a href="https://github.com/globalsign/mgo" target="_blank" rel="noopener">mgo</a>，以前mgo维护者是个人，后来因为精力的原因将其移交给社区。<br>mgo我用过相当长的一段时间，这是一个非常好用的驱动，基本可以满足我的需求。它最大的问题就是更新不够及时，总是落后官方一到两个版本。移交给社区后有一定的改善，但是依然存在类似的问题。比如说现在官方在今年的6月份已经发布了4.0的正式版，但是到目前为止半年过去了，mgo对4.0的支持依然是试验性的。<br>mongo-go-driver是在今年初推出的Alpha 1，到目前为止已经是Alpha 18了，虽然已经迭代了18个版本，但是依然不建议在生产环境使用。不过这不妨碍我们试用它，并在未来恰当的时机导入到生产环境中。</p>
+<h3 id="1-Demo"><a href="#1-Demo" class="headerlink" title="1. Demo"></a>1. Demo</h3>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/articles/mongo-go-driver-demo/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zh.shellman.me/articles/my-best-practice-series-of-cloudeflare-1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shellman">
+      <meta itemprop="description" content="年少不惧江湖老，放歌四海任逍遥。<br/>未解前路多少事，欲与青天试比高。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shellman">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/articles/my-best-practice-series-of-cloudeflare-1/" class="post-title-link" itemprop="https://zh.shellman.me/index.html">我的最佳实践之Cloudflare——基于免费服务</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-25 18:35:05" itemprop="dateCreated datePublished" datetime="2018-07-25T18:35:05+08:00">2018-07-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <div class="note danger"><p>阅读指南：</p><ol><li>这是一篇关于Cloudflare基础的文章，比较了解的朋友可以跳过。</li><li>以下CF为Cloudflare的简称。</li></ol></div>
+<h3 id="0-关于Cloudflare"><a href="#0-关于Cloudflare" class="headerlink" title="0. 关于Cloudflare"></a>0. 关于Cloudflare</h3><blockquote><p>Cloudflare是一间美国的跨国IT企业，总部位于旧金山，在伦敦和英美外亦设有办事处。<br>Cloudflare以向客户提供网站安全管理、性能优化及相关的技术支持为主要业务。通过基于反向代理的内容分发网络（Content Delivery Network,CDN）及分布式域名解析服务（Distributed Domain Name Server），Cloudflare可以帮助受保护站点抵御包括拒绝服务攻击在内的大多数网络攻击，确保该网站长期在线，同时提升网站的性能、加载速度以改善访客体验。</p>
+<footer><strong>wikipedia.org</strong><cite><a href="https://zh.wikipedia.org/wiki/CloudFlare" target="_blank" rel="noopener">CloudFlare</a></cite></footer></blockquote>
+<p>CF你可以把它理解为一个从域名解析开始覆盖全站的安全防护与CDN服务，与国内的各种云CDN服务是类似的，只不过它做的更早且更专注于这方面。</p>
+<h3 id="1-Cloudflare适合你吗？"><a href="#1-Cloudflare适合你吗？" class="headerlink" title="1. Cloudflare适合你吗？"></a>1. Cloudflare适合你吗？</h3><h4 id="1-1-网络性能"><a href="#1-1-网络性能" class="headerlink" title="1.1. 网络性能"></a>1.1. 网络性能</h4><p>首先，免费版的CF没有大陆节点（与百度合作的收费定制版有大陆节点，但是必须要ICP备案）。如果你的服务器也在大陆的话，那么大陆用户访问网站的时候，加载的每个资源都会经历两次跨区域网络传输，速度感人。下面这个表格用于说明服务器和用户在不同区域时<strong>使用CF时对页面加载速度的影响</strong>：
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/articles/my-best-practice-series-of-cloudeflare-1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </p></div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-6/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shellman">
+      <meta itemprop="description" content="年少不惧江湖老，放歌四海任逍遥。<br/>未解前路多少事，欲与青天试比高。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shellman">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/articles/build-a-home-server-based-on-raspberry-pi-6/" class="post-title-link" itemprop="https://zh.shellman.me/index.html">搭建基于树莓派的家用服务器/NAS(6)——数据同步存储/私有云盘（Syncthing）</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-21 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-21T00:00:00+08:00">2018-07-21</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <div class="note danger"><p>阅读指南：</p><ol><li>配置树莓派需要有一定的Linux基础。</li><li>不熟悉树莓派的朋友，可以从<a href="/articles/build-a-home-server-based-on-raspberry-pi-1/" title="第一篇文章">第一篇文章</a>开始。</li></ol></div>
+<div class="note info"><p><a href="https://zh.wikipedia.org/zh-hans/Syncthing" target="_blank" rel="noopener">Syncthing</a>是一个开源的文件同步客户端与服务器软件，可以通过Web界面或者原生客户端管理。</p></div>
+<h3 id="0-关于客户端和服务端"><a href="#0-关于客户端和服务端" class="headerlink" title="0. 关于客户端和服务端"></a>0. 关于客户端和服务端</h3><p>Syncthing是没有服务端和客户端的区分的，每个实例同时要充当这双重角色，多个实例之间互相同步。<br>举个具体的例子来说：树莓派不间断实例充当中转与备份用，这样在公司的电脑中编辑了文件会同步到树莓派里。回到家以后打开家里的电脑又会从树莓派中更新最新的文件到本地，这样就实现了在公司和在家中文件始终同步的体系。<br>这实际上就是私有云存储的概念了，自此不受第三方云存储的限制：容量、速度、流量、文件数量等。同时又能保证数据的私密性，不用担心数据被第三方云存储厂商泄漏。<br><em>私有云存储要格外注重安全方面的配置。若是安全配置不到位，数据安全性反而不如第三方云存储</em></p>
+<h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h3>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/articles/build-a-home-server-based-on-raspberry-pi-6/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-5/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shellman">
+      <meta itemprop="description" content="年少不惧江湖老，放歌四海任逍遥。<br/>未解前路多少事，欲与青天试比高。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shellman">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/articles/build-a-home-server-based-on-raspberry-pi-5/" class="post-title-link" itemprop="https://zh.shellman.me/index.html">搭建基于树莓派的家用服务器/NAS(5)——文件共享（Samba / SMB, Nginx / WebDav）</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-02 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-02T00:00:00+08:00">2018-07-02</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <div class="note danger"><p>阅读指南：</p><ol><li>配置树莓派需要有一定的Linux基础。</li><li>不熟悉树莓派的朋友，可以从<a href="/articles/build-a-home-server-based-on-raspberry-pi-1/" title="第一篇文章">第一篇文章</a>开始。</li></ol></div>
+<h3 id="0-关于WebDav和SMB"><a href="#0-关于WebDav和SMB" class="headerlink" title="0. 关于WebDav和SMB"></a>0. 关于WebDav和SMB</h3><div class="note info"><p><a href="https://zh.wikipedia.org/wiki/Samba" target="_blank" rel="noopener">Samba</a>是一个基于SMB协议的网络共享软件，SMB是一种常见的网络文件共享协议。<br>SMB的特点是使用专有端口，某些情况下性能有优势，但是它在安全性、通用性方面不如WebDav。</p></div>
+<div class="note info"><p><a href="https://zh.wikipedia.org/zh-hans/Nginx" target="_blank" rel="noopener">Nginx</a>是一个开源的Web服务软件，它支持WebDAV。<br>WebDav是基于http的，http有的功能它都有（比如说可以使用ssl加密），还可以直接用浏览器打开。可以看出来它的安全性和通用性非常优秀，适合在互联网上做共享。</p></div>
+<p>如果你的共享是在局域网中使用，建议使用SMB。若是要通过互联网使用，可以考虑WebDav。若两方面需求都有，也可以都搭建，它们能很好的共存互不干扰。</p>
+<h3 id="1-Samba-SMB"><a href="#1-Samba-SMB" class="headerlink" title="1. Samba / SMB"></a>1. Samba / SMB</h3><h4 id="1-1-安装"><a href="#1-1-安装" class="headerlink" title="1.1. 安装"></a>1.1. 安装</h4>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/articles/build-a-home-server-based-on-raspberry-pi-5/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-4/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shellman">
+      <meta itemprop="description" content="年少不惧江湖老，放歌四海任逍遥。<br/>未解前路多少事，欲与青天试比高。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shellman">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/articles/build-a-home-server-based-on-raspberry-pi-4/" class="post-title-link" itemprop="https://zh.shellman.me/index.html">搭建基于树莓派的家用服务器/NAS(4)——BT下载（Transmission）</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-22 00:00:00" itemprop="dateCreated datePublished" datetime="2018-06-22T00:00:00+08:00">2018-06-22</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <div class="note danger"><p>阅读指南：</p><ol><li>配置树莓派需要有一定的Linux基础。</li><li>不熟悉树莓派的朋友，可以从<a href="/articles/build-a-home-server-based-on-raspberry-pi-1/" title="第一篇文章">第一篇文章</a>开始。</li></ol></div>
+<div class="note info"><p><a href="https://zh.wikipedia.org/wiki/Transmission" target="_blank" rel="noopener">Transmission</a>是一个开源的BT传输软件，第一次配置好以后可以通过Web界面管理。</p></div>
+<h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h3><p>安装非常简单，执行<code>sudo apt -y install transmission-daemon</code>就可以自动安装了。</p>
+<h3 id="2-初次设置"><a href="#2-初次设置" class="headerlink" title="2. 初次设置"></a>2. 初次设置</h3><p>编辑配置文件<code>sudo vi /etc/transmission-daemon/settings.json</code>，首次使用只需要更改几个主要选项，其它的选项可以之后在web界面中设置。需修改的主要选项如下：
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/articles/build-a-home-server-based-on-raspberry-pi-4/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </p></div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-3/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shellman">
+      <meta itemprop="description" content="年少不惧江湖老，放歌四海任逍遥。<br/>未解前路多少事，欲与青天试比高。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shellman">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/articles/build-a-home-server-based-on-raspberry-pi-3/" class="post-title-link" itemprop="https://zh.shellman.me/index.html">搭建基于树莓派的家用服务器/NAS(3)——挂载外置硬盘</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-12 00:00:00" itemprop="dateCreated datePublished" datetime="2018-06-12T00:00:00+08:00">2018-06-12</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <div class="note danger"><p>阅读指南：</p><ol><li>配置树莓派需要有一定的Linux基础。</li><li>不熟悉树莓派的朋友，可以从<a href="/articles/build-a-home-server-based-on-raspberry-pi-1/" title="第一篇文章">第一篇文章</a>开始。</li></ol></div>
+<p>我这里用一个老的500G硬盘做演示，大家在操作不熟练的时候也最好使用一个无关紧要的存储设备来练练手，以防损害硬盘内的数据。</p>
+<h3 id="1-格式化硬盘"><a href="#1-格式化硬盘" class="headerlink" title="1. 格式化硬盘"></a>1. 格式化硬盘</h3><p><em>如果是已经格式化为linux支持的文件系统（如fat32、exfat、ext2/3/4等）的硬盘则可以直接挂载。</em><br>确保硬盘的USB已经接入树莓派，且独立供电。终端登录进树莓派后键入<code>sudo lsblk -o UUID,NAME,FSTYPE,SIZE,MOUNTPOINT,LABEL,MODEL</code>，可以显示所有存储设备，然后通过容量和名称可以轻易判断出sda是我们所要操作的设备名：
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/articles/build-a-home-server-based-on-raspberry-pi-3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </p></div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shellman">
+      <meta itemprop="description" content="年少不惧江湖老，放歌四海任逍遥。<br/>未解前路多少事，欲与青天试比高。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shellman">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/articles/build-a-home-server-based-on-raspberry-pi-2/" class="post-title-link" itemprop="https://zh.shellman.me/index.html">搭建基于树莓派的家用服务器/NAS(2)——安装系统</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-06 00:00:00" itemprop="dateCreated datePublished" datetime="2018-06-06T00:00:00+08:00">2018-06-06</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <div class="note danger"><p>阅读指南：</p><ol><li>配置树莓派需要有一定的Linux基础。</li><li>熟悉树莓派的朋友可以跳过前两篇文章，从<a href="/articles/build-a-home-server-based-on-raspberry-pi-3/" title="第三篇——挂载外置硬盘">第三篇——挂载外置硬盘</a>开始。</li></ol></div>
+<h3 id="1-下载安装包"><a href="#1-下载安装包" class="headerlink" title="1. 下载安装包"></a>1. 下载安装包</h3><ul>
+<li><a href="https://downloads.raspberrypi.org/raspbian_lite_latest" target="_blank" rel="noopener">无界面系统——Raspbian lite</a></li>
+<li><a href="https://etcher.io/" target="_blank" rel="noopener">将系统写入TF卡的软件——Etcher</a>
+</li>
+</ul>
+<h3 id="2-安装系统"><a href="#2-安装系统" class="headerlink" title="2. 安装系统"></a>2. 安装系统</h3><p>首先将TF卡通过读卡器接入电脑主机，再把Etcher安装好并打开：
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/articles/build-a-home-server-based-on-raspberry-pi-2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </p></div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shellman">
+      <meta itemprop="description" content="年少不惧江湖老，放歌四海任逍遥。<br/>未解前路多少事，欲与青天试比高。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shellman">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/articles/build-a-home-server-based-on-raspberry-pi-1/" class="post-title-link" itemprop="https://zh.shellman.me/index.html">搭建基于树莓派的家用服务器/NAS(1)——需求和硬件</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-03 00:00:00" itemprop="dateCreated datePublished" datetime="2018-06-03T00:00:00+08:00">2018-06-03</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <div class="note danger"><p>阅读指南：</p><ol><li>配置树莓派需要有一定的Linux基础。</li><li>熟悉树莓派的朋友可以跳过前两篇文章，从<a href="/articles/build-a-home-server-based-on-raspberry-pi-3/" title="第三篇——挂载外置硬盘">第三篇——挂载外置硬盘</a>开始。</li></ol></div>
+<h3 id="0-关于树莓派"><a href="#0-关于树莓派" class="headerlink" title="0. 关于树莓派"></a>0. 关于树莓派</h3><img src="/articles/build-a-home-server-based-on-raspberry-pi-1/raspberry-1.jpg" title="树莓派">
+<div class="note info"><p><strong>树莓派（英语：Raspberry Pi）</strong>其实就是一个拥有完整功能的电脑主机——小小的一个电路板上集成了CPU、显卡（集成在CPU里）、内存、硬盘（存储卡接口）、HDMI显示接口、USB接口、有线网络接口、音频接口，第三代产品甚至还有蓝牙和Wi-Fi。</p></div>
+<p>基于树莓派的家用服务器有以下优点：</p>
+<ul>
+<li>成本小——成本只要几百块钱</li>
+<li>功耗小——普通的手机充电器就能够供电</li>
+<li>体积小——巴掌大小，完全不占空间</li>
+<li>噪音小——不需要散热风扇，几乎没有噪音</li>
+</ul>
+<h3 id="1-需求"><a href="#1-需求" class="headerlink" title="1. 需求"></a>1. 需求</h3><p>我的需求主要来自于以下几点：<br>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/articles/build-a-home-server-based-on-raspberry-pi-1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </p></div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Shellman</p>
+              <p class="site-description motion-element" itemprop="description">年少不惧江湖老，放歌四海任逍遥。<br>未解前路多少事，欲与青天试比高。</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/shellmanme" title="GitHub &rarr; https://github.com/shellmanme" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:shellmanme@gmail.com" title="E-Mail &rarr; mailto:shellmanme@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"><a href="/">shellman.me</a></span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.5.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

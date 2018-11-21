@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next muse" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="阅读指南：配置树莓派需要有一定的Linux基础。熟悉树莓派的朋友可以跳过前两篇文章，从第三篇——挂载外置硬盘开始。 1. 下载安装包 无界面系统——Raspbian lite 将系统写入TF卡的软件——Etcher   2. 安装系统首先将TF卡通过读卡器接入电脑主机，再把Etcher安装好并打开：">
+<meta name="keywords" content="Raspberry Pi,家用服务器,NAS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建基于树莓派的家用服务器&#x2F;NAS(2)——安装系统">
+<meta property="og:url" content="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-2/index.html">
+<meta property="og:site_name" content="Shellman">
+<meta property="og:description" content="阅读指南：配置树莓派需要有一定的Linux基础。熟悉树莓派的朋友可以跳过前两篇文章，从第三篇——挂载外置硬盘开始。 1. 下载安装包 无界面系统——Raspbian lite 将系统写入TF卡的软件——Etcher   2. 安装系统首先将TF卡通过读卡器接入电脑主机，再把Etcher安装好并打开：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-2/etcher-1.png">
+<meta property="og:image" content="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-2/etcher-2.png">
+<meta property="og:image" content="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-2/etcher-3.png">
+<meta property="og:image" content="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-2/boot-folder-1.png">
+<meta property="og:image" content="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-2/boot-folder-2.png">
+<meta property="og:image" content="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-2/boot-folder-3.png">
+<meta property="og:image" content="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-2/ssh-mac-1.png">
+<meta property="og:updated_time" content="2018-11-21T15:55:58.990Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="搭建基于树莓派的家用服务器&#x2F;NAS(2)——安装系统">
+<meta name="twitter:description" content="阅读指南：配置树莓派需要有一定的Linux基础。熟悉树莓派的朋友可以跳过前两篇文章，从第三篇——挂载外置硬盘开始。 1. 下载安装包 无界面系统——Raspbian lite 将系统写入TF卡的软件——Etcher   2. 安装系统首先将TF卡通过读卡器接入电脑主机，再把Etcher安装好并打开：">
+<meta name="twitter:image" content="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-2/etcher-1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-2/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>搭建基于树莓派的家用服务器/NAS(2)——安装系统 | Shellman</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122715583-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-122715583-1');
+</script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shellman</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shellman">
+      <meta itemprop="description" content="年少不惧江湖老，放歌四海任逍遥。<br/>未解前路多少事，欲与青天试比高。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shellman">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">搭建基于树莓派的家用服务器/NAS(2)——安装系统
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-06 00:00:00" itemprop="dateCreated datePublished" datetime="2018-06-06T00:00:00+08:00">2018-06-06</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div class="note danger"><p>阅读指南：</p><ol><li>配置树莓派需要有一定的Linux基础。</li><li>熟悉树莓派的朋友可以跳过前两篇文章，从<a href="/articles/build-a-home-server-based-on-raspberry-pi-3/" title="第三篇——挂载外置硬盘">第三篇——挂载外置硬盘</a>开始。</li></ol></div>
+<h3 id="1-下载安装包"><a href="#1-下载安装包" class="headerlink" title="1. 下载安装包"></a>1. 下载安装包</h3><ul>
+<li><a href="https://downloads.raspberrypi.org/raspbian_lite_latest" target="_blank" rel="noopener">无界面系统——Raspbian lite</a></li>
+<li><a href="https://etcher.io/" target="_blank" rel="noopener">将系统写入TF卡的软件——Etcher</a>
+</li>
+</ul>
+<h3 id="2-安装系统"><a href="#2-安装系统" class="headerlink" title="2. 安装系统"></a>2. 安装系统</h3><p>首先将TF卡通过读卡器接入电脑主机，再把Etcher安装好并打开：<a id="more"></a><br><img src="/articles/build-a-home-server-based-on-raspberry-pi-2/etcher-1.png" title="Etcher界面"><br>然后点击第一段的“Select image”，选择刚才下载好的系统安装包。确认第二段自动选择的TF卡是否正确，若不正确可通过“change”按钮更改。最后点击“Flash”开始写入：<br><img src="/articles/build-a-home-server-based-on-raspberry-pi-2/etcher-2.png" title="Etcher写入中"><br>写入完成：<br><img src="/articles/build-a-home-server-based-on-raspberry-pi-2/etcher-3.png" title="Etcher写入完成"><br>在文件夹中打开TF卡（如果在文件夹中找不到TF卡的话，可以把TF重新插拔一次）：<br><img src="/articles/build-a-home-server-based-on-raspberry-pi-2/boot-folder-1.png" title="TF卡根目录"><br>因为树莓派默认是不启用ssh服务的，所以我们需要在TF卡的目录下新建一个叫“ssh”的空文件让树莓派默认启动ssh服务（或者新建一个txt空文档删掉后缀并改名为“ssh”）：<br><img src="/articles/build-a-home-server-based-on-raspberry-pi-2/boot-folder-2.png" title="TF卡根目录下新建ssh文件"><br><strong>【可选】</strong>因为我们使用的是无界面系统，所以可以给GPU分配少一点内存。打开config.txt，在最下面追加一行文本“gpu_mem=16”：<br><img src="/articles/build-a-home-server-based-on-raspberry-pi-2/boot-folder-3.png" title="调整默认gpu内存"><br>最后可以把TF弹出系统，插入树莓派中，接好网线、硬盘等，接入树莓派电源后它会自动引导系统。</p>
+<h3 id="3-验证系统是否安装成功"><a href="#3-验证系统是否安装成功" class="headerlink" title="3. 验证系统是否安装成功"></a>3. 验证系统是否安装成功</h3><p>确保树莓派接入网线和电源，并确保所处网络和我们的电脑在同一个局域网下。<br><div class="note info"><p>树莓派的默认账户信息：<br>地址：raspberrypi.local<br>用户名：pi<br>密码：raspberry</p></div><br>以下是基于Mac平台的演示：</p>
+<ol>
+<li>打开终端。</li>
+<li>键入<code>ssh pi@raspberrypi.local</code>并回车。</li>
+<li>终端输出<code>The authenticity of host &#39;raspberrypi.local (fe80::1927:9516:f600:fbcd%en0)&#39; can&#39;t be established.……(yes/no)?</code>则表示已成功访问到了树莓派，回车进入下一步。（这步保存信息后下次不会再次询问）</li>
+<li>输入密码<code>raspberry</code>回车，如果看到如下输出则表示登录成功可以开始操作树莓派了：<img src="/articles/build-a-home-server-based-on-raspberry-pi-2/ssh-mac-1.png" title="Mac平台ssh访问树莓派"></li>
+</ol>
+<h3 id="4-服务器基本配置"><a href="#4-服务器基本配置" class="headerlink" title="4. 服务器基本配置"></a>4. 服务器基本配置</h3><p>因为我们现在搭建的是一台服务器（家用服务器也是服务器😄），所以需要考虑安全性的问题。基本的配置是必要的，比如说系统升级、用户权限、SSH安全、防火墙等等。具体的配置步骤可参考：<a href="https://www.linode.com/docs/security/securing-your-server/" target="_blank" rel="noopener">How to Secure Your Server</a>、<a href="http://blog.jobbole.com/103344/" target="_blank" rel="noopener">10 分钟服务器安全设置</a>，但是要注意配置防火墙的时候，需要为我们后面的网络服务预留几个端口（比如说8000-8002）。最后记得安装vim（<code>sudo apt -y install vim</code>，后面会大量使用。</p>
+<p>[可选] 安装一些常用软件，如：git、zsh &amp;&amp; Oh-My-Zsh。</p>
+<div class="note info"><p>另外，树莓派有自己的专用配置界面，可以简化部分操作（修改密码、设置语言、设置wifi等），命令行输入sudo raspi-config进入。</p></div>
+<div class="note warning"><p>就像你正在使用的电脑一样，树莓派也不能直接拔电源关机（否则会对数据造成损坏，甚至波及硬件）。必须通过指令安全关机<code>sudo shutdown now</code>后才能切断电源。</p></div>
+<hr>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/raspberry-pi/" rel="tag"># Raspberry Pi</a>
+          
+            <a href="/tags/家用服务器/" rel="tag"># 家用服务器</a>
+          
+            <a href="/tags/nas/" rel="tag"># NAS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/build-a-home-server-based-on-raspberry-pi-1/" rel="next" title="搭建基于树莓派的家用服务器/NAS(1)——需求和硬件">
+                <i class="fa fa-chevron-left"></i> 搭建基于树莓派的家用服务器/NAS(1)——需求和硬件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/articles/build-a-home-server-based-on-raspberry-pi-3/" rel="prev" title="搭建基于树莓派的家用服务器/NAS(3)——挂载外置硬盘">
+                搭建基于树莓派的家用服务器/NAS(3)——挂载外置硬盘 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Shellman</p>
+              <p class="site-description motion-element" itemprop="description">年少不惧江湖老，放歌四海任逍遥。<br>未解前路多少事，欲与青天试比高。</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/shellmanme" title="GitHub &rarr; https://github.com/shellmanme" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:shellmanme@gmail.com" title="E-Mail &rarr; mailto:shellmanme@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-下载安装包"><span class="nav-text">1. 下载安装包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装系统"><span class="nav-text">2. 安装系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-验证系统是否安装成功"><span class="nav-text">3. 验证系统是否安装成功</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-服务器基本配置"><span class="nav-text">4. 服务器基本配置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"><a href="/">shellman.me</a></span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.5.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

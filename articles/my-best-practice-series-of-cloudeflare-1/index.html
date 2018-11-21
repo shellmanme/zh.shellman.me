@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next muse" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="阅读指南：这是一篇关于Cloudflare基础的文章，比较了解的朋友可以跳过。以下CF为Cloudflare的简称。 0. 关于CloudflareCloudflare是一间美国的跨国IT企业，总部位于旧金山，在伦敦和英美外亦设有办事处。Cloudflare以向客户提供网站安全管理、性能优化及相关的技术支持为主要业务。通过基于反向代理的内容分发网络（Content Delivery Network">
+<meta name="keywords" content="我的最佳实践,Cloudflare">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的最佳实践之Cloudflare——基于免费服务">
+<meta property="og:url" content="https://zh.shellman.me/articles/my-best-practice-series-of-cloudeflare-1/index.html">
+<meta property="og:site_name" content="Shellman">
+<meta property="og:description" content="阅读指南：这是一篇关于Cloudflare基础的文章，比较了解的朋友可以跳过。以下CF为Cloudflare的简称。 0. 关于CloudflareCloudflare是一间美国的跨国IT企业，总部位于旧金山，在伦敦和英美外亦设有办事处。Cloudflare以向客户提供网站安全管理、性能优化及相关的技术支持为主要业务。通过基于反向代理的内容分发网络（Content Delivery Network">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-21T15:55:58.990Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="我的最佳实践之Cloudflare——基于免费服务">
+<meta name="twitter:description" content="阅读指南：这是一篇关于Cloudflare基础的文章，比较了解的朋友可以跳过。以下CF为Cloudflare的简称。 0. 关于CloudflareCloudflare是一间美国的跨国IT企业，总部位于旧金山，在伦敦和英美外亦设有办事处。Cloudflare以向客户提供网站安全管理、性能优化及相关的技术支持为主要业务。通过基于反向代理的内容分发网络（Content Delivery Network">
+
+
+
+
+
+
+  <link rel="canonical" href="https://zh.shellman.me/articles/my-best-practice-series-of-cloudeflare-1/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>我的最佳实践之Cloudflare——基于免费服务 | Shellman</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122715583-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-122715583-1');
+</script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shellman</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zh.shellman.me/articles/my-best-practice-series-of-cloudeflare-1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shellman">
+      <meta itemprop="description" content="年少不惧江湖老，放歌四海任逍遥。<br/>未解前路多少事，欲与青天试比高。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shellman">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">我的最佳实践之Cloudflare——基于免费服务
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-25 18:35:05" itemprop="dateCreated datePublished" datetime="2018-07-25T18:35:05+08:00">2018-07-25</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div class="note danger"><p>阅读指南：</p><ol><li>这是一篇关于Cloudflare基础的文章，比较了解的朋友可以跳过。</li><li>以下CF为Cloudflare的简称。</li></ol></div>
+<h3 id="0-关于Cloudflare"><a href="#0-关于Cloudflare" class="headerlink" title="0. 关于Cloudflare"></a>0. 关于Cloudflare</h3><blockquote><p>Cloudflare是一间美国的跨国IT企业，总部位于旧金山，在伦敦和英美外亦设有办事处。<br>Cloudflare以向客户提供网站安全管理、性能优化及相关的技术支持为主要业务。通过基于反向代理的内容分发网络（Content Delivery Network,CDN）及分布式域名解析服务（Distributed Domain Name Server），Cloudflare可以帮助受保护站点抵御包括拒绝服务攻击在内的大多数网络攻击，确保该网站长期在线，同时提升网站的性能、加载速度以改善访客体验。</p>
+<footer><strong>wikipedia.org</strong><cite><a href="https://zh.wikipedia.org/wiki/CloudFlare" target="_blank" rel="noopener">CloudFlare</a></cite></footer></blockquote>
+<p>CF你可以把它理解为一个从域名解析开始覆盖全站的安全防护与CDN服务，与国内的各种云CDN服务是类似的，只不过它做的更早且更专注于这方面。</p>
+<h3 id="1-Cloudflare适合你吗？"><a href="#1-Cloudflare适合你吗？" class="headerlink" title="1. Cloudflare适合你吗？"></a>1. Cloudflare适合你吗？</h3><h4 id="1-1-网络性能"><a href="#1-1-网络性能" class="headerlink" title="1.1. 网络性能"></a>1.1. 网络性能</h4><p>首先，免费版的CF没有大陆节点（与百度合作的收费定制版有大陆节点，但是必须要ICP备案）。如果你的服务器也在大陆的话，那么大陆用户访问网站的时候，加载的每个资源都会经历两次跨区域网络传输，速度感人。下面这个表格用于说明服务器和用户在不同区域时<strong>使用CF时对页面加载速度的影响</strong>：<a id="more"></a> </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>用户在海外</th>
+<th>用户在大陆</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>服务器在海外</strong></td>
+<td>速度<strong style="color:green;">优秀</strong></td>
+<td>速度一般</td>
+</tr>
+<tr>
+<td><strong>服务器在大陆</strong></td>
+<td>速度一般</td>
+<td>速度<strong style="color:red;">不好</strong></td>
+</tr>
+</tbody>
+</table>
+<h4 id="1-2-CDN"><a href="#1-2-CDN" class="headerlink" title="1.2. CDN"></a>1.2. CDN</h4><p>其次，因为CF是基于域名的全站CDN。所以它的CDN系列功能特别适合静态内容较多的产品，比如说官网、博客等。对于数量庞大的动/静态内容混合性产品来说，通过精心配置也是比较适合的。如果是纯动态内容，比如说API服务，那么CDN效果就有限了。</p>
+<h4 id="1-3-安全性"><a href="#1-3-安全性" class="headerlink" title="1.3. 安全性"></a>1.3. 安全性</h4><p>上面说的都是基于性能方面的考量，CF在安全性方面也有非常大的作用。比如说所有流量通过CF接入并过滤，隐藏服务器真实IP，DDOS什么的再也不用害怕了。所以即使是动态内容较多的服务，也可以使用CF为自己加一层保护。除了DDOS防护以外，CF也有不少Web相关的安全设置，这都是免费的哦。</p>
+<h3 id="2-Cloudflare配置（基于免费服务）"><a href="#2-Cloudflare配置（基于免费服务）" class="headerlink" title="2. Cloudflare配置（基于免费服务）"></a>2. Cloudflare配置（基于免费服务）</h3><p>以下所有配置项在CF控制面板中都有详细的解说和帮助，不明白的地方可以登录上去看一下。</p>
+<ul>
+<li>DNS<ul>
+<li>DNS Records —— 选择“Orange Cloud”，也就是图标是“箭头从黄云中穿过”的这个选项。只有这个选项能够发挥全部的CF功能，实现全站防护和全站CDN。</li>
+<li>DNSSEC —— 这是一个DNS的安全扩展选项，启用后可以在请求IP的时候验证真实性，但是需要各级DNS和域名商都要支持才行。目前来说使用难度较大，比如我的域名商就不支持.me域名启用该功能。</li>
+</ul>
+</li>
+<li>Crypto<ul>
+<li>SSL —— 选择“Full SSL (strict)”，这是最安全的一种选项：双向SSL、会验证证书有效性，而且实施难度不高。现在以Chrome和ios为首的平台，都已经在大力推广https了，所以没有理由不启用这一项。</li>
+<li>Origin Certificates —— 创建CF的专用证书。上一项SSL选择了strict模式，则会验证己方服务器的证书有效性。如果你没有经过CA签名的SSL证书的话，可以使用这个CF专用证书在strict模式下同样有效。<em>若你懒得去配置letsencrypt等免费服务或者不愿买一个证书的话，可以考虑使用这个CF的私有证书简化配置。</em></li>
+<li>Always use HTTPS —— SSL都已经启用了strict项了，这个选项毫无疑问是需要“On”的。</li>
+<li>HTTP Strict Transport Security (HSTS) —— 如果你确定域名以后所有的流量都经过SSL的话可以启用这一项（内置选项也全部选为“On”且有效期至少一个月），能进一步提升安全性和减少请求次数。不过要注意的是<strong>如果你不是很确定是否要一直使用SSL</strong>的话则需要谨慎选择，详细的介绍请参照CF内的帮助和google。</li>
+<li>Authenticated Origin Pulls —— 可以在这个选项或者在Nginx/Apache中对访问IP限制这两项中二选一。</li>
+<li>Minimum TLS Version —— TLS 1.1。</li>
+<li>Opportunistic Encryption —— On。其实使用了全站SSL后这个选项已经没什么关系了，不过选上也不会吃亏^_^</li>
+<li>TLS 1.3 —— Enable+0RTT。</li>
+</ul>
+</li>
+<li>Firewall<ul>
+<li>Security Level —— 建议使用默认的Medium，若有被攻击的迹象可以再行调整。</li>
+<li>Challenge Passage —— 自行选择。</li>
+<li>IP Firewall —— 自行选择。这个功能在你想要禁用某些IP或者某个区域的IP时非常有用。</li>
+</ul>
+</li>
+<li>Speed<ul>
+<li>Auto Minify —— 全部启用。</li>
+<li>Enable Accelerated Mobile Links —— 自行选择。如果你的网站支持AMP，那么这个选项可以帮助客户端进入AMP模式。</li>
+<li>Brotli —— On。</li>
+<li>Rocket Loader —— On（建议开启后测试一遍网站功能）。以前这个功能是beta的，当时可能会对网站的js运行产生不好的影响。虽然目前已经取消了beta，但是建议开启后对自己网站进行适当的测试。</li>
+<li>Mobile Redirect —— 自行选择。</li>
+</ul>
+</li>
+<li>Caching<ul>
+<li>Caching Level —— Standard</li>
+<li>Browser Cache Expiration —— 自行选择</li>
+<li>Always Online —— 如果服务器自身没有相关的应急措施的话，可以使用CF提供的一个比较友好的说明页面。</li>
+<li>Development Mode —— 在线调试网站的时候可以启用这个选项，暂时关闭CF的缓存功能。</li>
+</ul>
+</li>
+<li>Page Rules<ul>
+<li>Page Rules —— 免费用户有可以针对单个页面或者一些页面设置3条规则。这些规则是在CF端判断的，所以响应速度会比较快。</li>
+</ul>
+</li>
+<li>Network<ul>
+<li>HTTP/2 —— On。</li>
+<li>WebSockets —— 自行选择。</li>
+<li>Pseudo IPv4 —— 如果你不使用IPv6的话，这个选项可以不管。</li>
+<li>IP Geolocation —— CF内置的一个GeoIP功能，如果你不需要使用，或者你服务器内置的有相关功能，可以忽略。</li>
+<li>Maximum Upload Size —— 免费版只能选择100M。如果你的服务器需要上传较大的文件，可以考虑使用企业版，或者自建一个代理绕过CF进行上传，但是要注意安全问题<em>（比如使用一台次要服务器做代理防止主服务器IP泄漏）</em>。</li>
+</ul>
+</li>
+<li>Scrape Shield<ul>
+<li>Email Address Obfuscation —— On，防止Email被爬虫抓取。</li>
+<li>Server-side Excludes —— On，即使不用这个功能对你也没什么影响。</li>
+<li>Hotlink Protection —— 自行选择。可以防止图片等资源文件被盗链。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-己方服务器配置"><a href="#3-己方服务器配置" class="headerlink" title="3. 己方服务器配置"></a>3. 己方服务器配置</h3><ul>
+<li>证书 —— 因为使用了CF的Full SSL (strict)模式，所以必须配置证书，无论是用CA签名的证书或是CF自己的专用证书都可以。</li>
+<li>防止第三方绕过CF —— 如果不使用CF的Authenticated Origin Pulls功能的话，建议只允许<a href="https://www.cloudflare.com/ips/" target="_blank" rel="noopener">CF的IP</a>访问（注意这个ip列表有可能会变化），防止第三方绕过CF而直接访问你的网站。</li>
+<li>客户端IP —— 因为客户端是通过CF访问你网站的，所以你此刻获取到的IP是CF的服务器IP。不过好在CF在请求原始服务器资源的时候，会将客户端的IP附在http header里的“CF-Connecting-IP”字段中。所以你的日志或其它功能需要用到客户端IP时，可以取这个字段的数据。</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/我的最佳实践/" rel="tag"># 我的最佳实践</a>
+          
+            <a href="/tags/cloudflare/" rel="tag"># Cloudflare</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/build-a-home-server-based-on-raspberry-pi-6/" rel="next" title="搭建基于树莓派的家用服务器/NAS(6)——数据同步存储/私有云盘（Syncthing）">
+                <i class="fa fa-chevron-left"></i> 搭建基于树莓派的家用服务器/NAS(6)——数据同步存储/私有云盘（Syncthing）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/articles/mongo-go-driver-demo/" rel="prev" title="MongoDB官方推出的Go驱动库“mongo-go-driver”快速教程">
+                MongoDB官方推出的Go驱动库“mongo-go-driver”快速教程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Shellman</p>
+              <p class="site-description motion-element" itemprop="description">年少不惧江湖老，放歌四海任逍遥。<br>未解前路多少事，欲与青天试比高。</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/shellmanme" title="GitHub &rarr; https://github.com/shellmanme" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:shellmanme@gmail.com" title="E-Mail &rarr; mailto:shellmanme@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-关于Cloudflare"><span class="nav-text">0. 关于Cloudflare</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Cloudflare适合你吗？"><span class="nav-text">1. Cloudflare适合你吗？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-网络性能"><span class="nav-text">1.1. 网络性能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-CDN"><span class="nav-text">1.2. CDN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-安全性"><span class="nav-text">1.3. 安全性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Cloudflare配置（基于免费服务）"><span class="nav-text">2. Cloudflare配置（基于免费服务）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-己方服务器配置"><span class="nav-text">3. 己方服务器配置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"><a href="/">shellman.me</a></span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.5.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
