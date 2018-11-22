@@ -372,7 +372,7 @@
                 
               
 
-              <time title="创建时间：2018-11-22 00:00:00 / 修改时间：21:37:08" itemprop="dateCreated datePublished" datetime="2018-11-22T00:00:00+08:00">2018-11-22</time>
+              <time title="创建时间：2018-11-22 00:00:00 / 修改时间：21:44:18" itemprop="dateCreated datePublished" datetime="2018-11-22T00:00:00+08:00">2018-11-22</time>
             
 
             
@@ -411,7 +411,9 @@
 
       
         
-          <h3 id="0-关于“mongo-go-driver”"><a href="#0-关于“mongo-go-driver”" class="headerlink" title="0. 关于“mongo-go-driver”"></a>0. 关于“mongo-go-driver”</h3><p>MongoDB一直缺乏官方的Go驱动库，官方仅做了社区驱动的推荐：<a href="https://docs.mongodb.com/ecosystem/drivers/community-supported-drivers/" target="_blank" rel="noopener">Community Supported Drivers Reference</a>。这其中Go驱动推荐的是<a href="https://github.com/globalsign/mgo" target="_blank" rel="noopener">mgo</a>，以前mgo维护者是个人，后来因为精力的原因将其移交给社区。<br>mgo我用过相当长的一段时间，这是一个非常好用的驱动，基本可以满足我的需求。它最大的问题就是更新不够及时，总是落后官方一到两个版本。移交给社区后有一定的改善，但是依然存在类似的问题。比如说在今年的6月份MongoDB 4.0的正式版已经发布了，但是到目前为止半年过去了，mgo对4.0的支持依然是试验性的。<br>官方的驱动一般都会更新的更及时，新版本带来的特性也会支持的更好。而在今年初，MongoDB官方公开了Go的官方驱动“<a href="https://github.com/mongodb/mongo-go-driver" target="_blank" rel="noopener">mongo-go-driver</a>”的Alpha 1版本。到目前为止已经是Alpha 18了，虽然已经迭代了18个版本，但是依然不建议在生产环境使用。不过这不妨碍我们试用它，并在未来恰当的时机导入到生产环境中。</p>
+          <h3 id="0-关于“mongo-go-driver”"><a href="#0-关于“mongo-go-driver”" class="headerlink" title="0. 关于“mongo-go-driver”"></a>0. 关于“mongo-go-driver”</h3><p>MongoDB一直缺乏官方的Go驱动库，官方仅做了社区驱动的推荐：<a href="https://docs.mongodb.com/ecosystem/drivers/community-supported-drivers/" target="_blank" rel="noopener">Community Supported Drivers Reference</a>。这其中Go驱动推荐的是<a href="https://github.com/globalsign/mgo" target="_blank" rel="noopener">mgo</a>，以前mgo维护者是个人，后来因为精力的原因将其移交给社区。</p>
+<p>mgo我用过相当长的一段时间，这是一个非常好用的驱动，基本可以满足我的需求。它最大的问题就是更新不够及时，总是落后官方一到两个版本。移交给社区后有一定的改善，但是依然存在类似的问题。比如说在今年的6月份MongoDB 4.0的正式版已经发布了，但是到目前为止半年过去了，mgo对4.0的支持依然是试验性的。</p>
+<p>官方的驱动一般都会更新的更及时，新版本带来的特性也会支持的更好。而在今年初，MongoDB官方公开了Go的官方驱动“<a href="https://github.com/mongodb/mongo-go-driver" target="_blank" rel="noopener">mongo-go-driver</a>”的Alpha 1版本。到目前为止已经是Alpha 18了，虽然已经迭代了18个版本，但是依然不建议在生产环境使用。不过这不妨碍我们试用它，并在未来恰当的时机导入到生产环境中。</p>
 <h3 id="1-演示"><a href="#1-演示" class="headerlink" title="1. 演示"></a>1. 演示</h3><h4 id="1-1-映射"><a href="#1-1-映射" class="headerlink" title="1.1. 映射"></a>1.1. 映射</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">	ID    objectid.ObjectID <span class="string">"_id,omitempty"</span></span><br><span class="line">	Name  <span class="keyword">string</span>	<span class="string">`bson:"dbname",json:"jsonname"`</span></span><br><span class="line">	Phone <span class="keyword">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>有三种规则：<br>
           <!--noindex-->
@@ -703,7 +705,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-21 23:55:58" itemprop="dateModified" datetime="2018-11-21T23:55:58+08:00">2018-11-21</time>
+                <time title="修改时间：2018-11-22 21:44:38" itemprop="dateModified" datetime="2018-11-22T21:44:38+08:00">2018-11-22</time>
               
             
           </span>
@@ -739,7 +741,8 @@
         
           <div class="note danger"><p>阅读指南：</p><ol><li>配置树莓派需要有一定的Linux基础。</li><li>不熟悉树莓派的朋友，可以从<a href="/articles/build-a-home-server-based-on-raspberry-pi-1/" title="第一篇文章">第一篇文章</a>开始。</li></ol></div>
 <div class="note info"><p><a href="https://zh.wikipedia.org/zh-hans/Syncthing" target="_blank" rel="noopener">Syncthing</a>是一个开源的文件同步客户端与服务器软件，可以通过Web界面或者原生客户端管理。</p></div>
-<h3 id="0-关于客户端和服务端"><a href="#0-关于客户端和服务端" class="headerlink" title="0. 关于客户端和服务端"></a>0. 关于客户端和服务端</h3><p>Syncthing是没有服务端和客户端的区分的，每个实例同时要充当这双重角色，多个实例之间互相同步。<br>举个具体的例子来说：树莓派不间断实例充当中转与备份用，这样在公司的电脑中编辑了文件会同步到树莓派里。回到家以后打开家里的电脑又会从树莓派中更新最新的文件到本地，这样就实现了在公司和在家中文件始终同步的体系。<br>这实际上就是私有云存储的概念了，自此不受第三方云存储的限制：容量、速度、流量、文件数量等。同时又能保证数据的私密性，不用担心数据被第三方云存储厂商泄漏。<br><em>私有云存储要格外注重安全方面的配置。若是安全配置不到位，数据安全性反而不如第三方云存储</em></p>
+<h3 id="0-关于客户端和服务端"><a href="#0-关于客户端和服务端" class="headerlink" title="0. 关于客户端和服务端"></a>0. 关于客户端和服务端</h3><p>Syncthing是没有服务端和客户端的区分的，每个实例同时要充当这双重角色，多个实例之间互相同步。<br>举个具体的例子来说：树莓派不间断实例充当中转与备份用，这样在公司的电脑中编辑了文件会同步到树莓派里。回到家以后打开家里的电脑又会从树莓派中更新最新的文件到本地，这样就实现了在公司和在家中文件始终同步的体系。</p>
+<p>这实际上就是私有云存储的概念了，自此不受第三方云存储的限制：容量、速度、流量、文件数量等。同时又能保证数据的私密性，不用担心数据被第三方云存储厂商泄漏。<br><em>私有云存储要格外注重安全方面的配置。若是安全配置不到位，数据安全性反而不如第三方云存储</em></p>
 <h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h3>
           <!--noindex-->
           
@@ -1193,7 +1196,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-21 23:55:58" itemprop="dateModified" datetime="2018-11-21T23:55:58+08:00">2018-11-21</time>
+                <time title="修改时间：2018-11-22 21:45:13" itemprop="dateModified" datetime="2018-11-22T21:45:13+08:00">2018-11-22</time>
               
             
           </span>
@@ -1229,7 +1232,9 @@
         
           <div class="note danger"><p>阅读指南：</p><ol><li>配置树莓派需要有一定的Linux基础。</li><li>不熟悉树莓派的朋友，可以从<a href="/articles/build-a-home-server-based-on-raspberry-pi-1/" title="第一篇文章">第一篇文章</a>开始。</li></ol></div>
 <p>我这里用一个老的500G硬盘做演示，大家在操作不熟练的时候也最好使用一个无关紧要的存储设备来练练手，以防损害硬盘内的数据。</p>
-<h3 id="1-格式化硬盘"><a href="#1-格式化硬盘" class="headerlink" title="1. 格式化硬盘"></a>1. 格式化硬盘</h3><p><em>如果是已经格式化为linux支持的文件系统（如fat32、exfat、ext2/3/4等）的硬盘则可以直接挂载。</em><br>确保硬盘的USB已经接入树莓派，且独立供电。终端登录进树莓派后键入<code>sudo lsblk -o UUID,NAME,FSTYPE,SIZE,MOUNTPOINT,LABEL,MODEL</code>，可以显示所有存储设备，然后通过容量和名称可以轻易判断出sda是我们所要操作的设备名：
+<h3 id="1-格式化硬盘"><a href="#1-格式化硬盘" class="headerlink" title="1. 格式化硬盘"></a>1. 格式化硬盘</h3><p><em>如果是已经格式化为linux支持的文件系统（如fat32、exfat、ext2/3/4等）的硬盘则可以直接挂载。</em></p>
+<p>确保硬盘的USB已经接入树莓派，且独立供电。终端登录进树莓派后键入<code>sudo lsblk -o UUID,NAME,FSTYPE,SIZE,MOUNTPOINT,LABEL,MODEL</code>，可以显示所有存储设备，然后通过容量和</p>
+<p>名称可以轻易判断出sda是我们所要操作的设备名：
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1355,7 +1360,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-21 23:55:58" itemprop="dateModified" datetime="2018-11-21T23:55:58+08:00">2018-11-21</time>
+                <time title="修改时间：2018-11-22 21:45:27" itemprop="dateModified" datetime="2018-11-22T21:45:27+08:00">2018-11-22</time>
               
             
           </span>
@@ -1521,7 +1526,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-21 23:55:58" itemprop="dateModified" datetime="2018-11-21T23:55:58+08:00">2018-11-21</time>
+                <time title="修改时间：2018-11-22 21:45:35" itemprop="dateModified" datetime="2018-11-22T21:45:35+08:00">2018-11-22</time>
               
             
           </span>

@@ -118,7 +118,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-1/raspberry-1.jpg">
 <meta property="og:image" content="https://zh.shellman.me/articles/build-a-home-server-based-on-raspberry-pi-1/my-devices-1.jpg">
-<meta property="og:updated_time" content="2018-11-21T15:55:58.978Z">
+<meta property="og:updated_time" content="2018-11-22T13:45:35.745Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建基于树莓派的家用服务器&#x2F;NAS(1)——需求和硬件">
 <meta name="twitter:description" content="阅读指南：配置树莓派需要有一定的Linux基础。熟悉树莓派的朋友可以跳过前两篇文章，从第三篇——挂载外置硬盘开始。 0. 关于树莓派 树莓派（英语：Raspberry Pi）其实就是一个拥有完整功能的电脑主机——小小的一个电路板上集成了CPU、显卡（集成在CPU里）、内存、硬盘（存储卡接口）、HDMI显示接口、USB接口、有线网络接口、音频接口，第三代产品甚至还有蓝牙和Wi-Fi。 基于树莓派的家">
@@ -389,7 +389,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-21 23:55:58" itemprop="dateModified" datetime="2018-11-21T23:55:58+08:00">2018-11-21</time>
+                <time title="修改时间：2018-11-22 21:45:35" itemprop="dateModified" datetime="2018-11-22T21:45:35+08:00">2018-11-22</time>
               
             
           </span>
@@ -443,7 +443,8 @@
 <h3 id="2-硬件"><a href="#2-硬件" class="headerlink" title="2. 硬件"></a>2. 硬件</h3><p>为了满足需求，建议硬件如下：</p>
 <h4 id="2-1-树莓派"><a href="#2-1-树莓派" class="headerlink" title="2.1. 树莓派"></a>2.1. 树莓派</h4><p>使用2018年最新的树莓派3B+，这样有线网络理论带宽可以达到300Mbps。我以前用的树莓派2B理论带宽只有100Mbps，因为有协议损耗等等，实际使用的时候不到90M，看有些码率较高的4K电影时会卡顿。</p>
 <h4 id="2-2-TF存储卡"><a href="#2-2-TF存储卡" class="headerlink" title="2.2. TF存储卡"></a>2.2. TF存储卡</h4><p>TF卡用作树莓派的系统盘，推荐选择大品牌的高速卡保障稳定性。为了方便以后扩展功能，最好不要低于16G的容量。<br><div class="note warning"><p>树莓派也可以用外置硬盘做系统盘引导，但是建议新手还是继续用TF卡做系统盘，这样就可以把系统盘和数据盘硬件分割。以后要是系统出现问题，只需要修复或重装TF卡，不会波及到外置硬盘，降低数据损失的风险。</p></div></p>
-<h4 id="2-3-硬盘和硬盘盒"><a href="#2-3-硬盘和硬盘盒" class="headerlink" title="2.3. 硬盘和硬盘盒"></a>2.3. 硬盘和硬盘盒</h4><p>外置硬盘作为数据盘存储文件。选择有独立供电的硬盘盒和台式机硬盘，千万不要用便携式移动硬盘（血与泪的教训）。对价格敏感的话可以考虑5400转的监控级硬盘，因为树莓派的USB带宽不高，所以即使是低速硬盘的速度也完全能达到带宽上限。<br>硬盘盒还可以选择多盘位的，这样的话存储的扩展性就非常强了。有些高端硬盘柜甚至支持RAID，硬件层面防止数据丢失。</p>
+<h4 id="2-3-硬盘和硬盘盒"><a href="#2-3-硬盘和硬盘盒" class="headerlink" title="2.3. 硬盘和硬盘盒"></a>2.3. 硬盘和硬盘盒</h4><p>外置硬盘作为数据盘存储文件。选择有独立供电的硬盘盒和台式机硬盘，千万不要用便携式移动硬盘（血与泪的教训）。对价格敏感的话可以考虑5400转的监控级硬盘，因为树莓派的USB带宽不高，所以即使是低速硬盘的速度也完全能达到带宽上限。</p>
+<p>硬盘盒还可以选择多盘位的，这样的话存储的扩展性就非常强了。有些高端硬盘柜甚至支持RAID，硬件层面防止数据丢失。</p>
 <h4 id="2-4-电源"><a href="#2-4-电源" class="headerlink" title="2.4. 电源"></a>2.4. 电源</h4><p>树莓派的电源接口和许多Android手机一样是MicroUSB。官方推荐的是5V/2.5A电源，不过若家里有闲置的手机2A电流的充电器也可以使用。</p>
 <h4 id="2-5-其它设备"><a href="#2-5-其它设备" class="headerlink" title="2.5. 其它设备"></a>2.5. 其它设备</h4><p>路由器要有千兆有线局域网，最好能有ddns方便外网访问。</p>
 <h4 id="2-6-我的硬件情况"><a href="#2-6-我的硬件情况" class="headerlink" title="2.6. 我的硬件情况"></a>2.6. 我的硬件情况</h4><ul>
