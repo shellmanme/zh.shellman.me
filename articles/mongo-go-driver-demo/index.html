@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="Shellman">
 <meta property="og:description" content="0. 关于“mongo-go-driver”MongoDB一直缺乏官方的Go驱动库，官方仅做了社区驱动的推荐：Community Supported Drivers Reference。这其中Go驱动推荐的是mgo，以前mgo维护者是个人，后来因为精力的原因将其移交给社区。mgo我用过相当长的一段时间，这是一个非常好用的驱动，基本可以满足我的需求。它最大的问题就是更新不够及时，总是落后官方一到">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-22T12:52:01.420Z">
+<meta property="og:updated_time" content="2018-11-22T13:37:08.755Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB官方推出的Go驱动库“mongo-go-driver”快速教程">
 <meta name="twitter:description" content="0. 关于“mongo-go-driver”MongoDB一直缺乏官方的Go驱动库，官方仅做了社区驱动的推荐：Community Supported Drivers Reference。这其中Go驱动推荐的是mgo，以前mgo维护者是个人，后来因为精力的原因将其移交给社区。mgo我用过相当长的一段时间，这是一个非常好用的驱动，基本可以满足我的需求。它最大的问题就是更新不够及时，总是落后官方一到">
@@ -369,7 +369,7 @@
                 
               
 
-              <time title="创建时间：2018-11-22 00:00:00 / 修改时间：20:52:01" itemprop="dateCreated datePublished" datetime="2018-11-22T00:00:00+08:00">2018-11-22</time>
+              <time title="创建时间：2018-11-22 00:00:00 / 修改时间：21:37:08" itemprop="dateCreated datePublished" datetime="2018-11-22T00:00:00+08:00">2018-11-22</time>
             
 
             
@@ -407,7 +407,7 @@
       
 
       
-        <h3 id="0-关于“mongo-go-driver”"><a href="#0-关于“mongo-go-driver”" class="headerlink" title="0. 关于“mongo-go-driver”"></a>0. 关于“mongo-go-driver”</h3><p>MongoDB一直缺乏官方的Go驱动库，官方仅做了社区驱动的推荐：<a href="https://docs.mongodb.com/ecosystem/drivers/community-supported-drivers/" target="_blank" rel="noopener">Community Supported Drivers Reference</a>。这其中Go驱动推荐的是<a href="https://github.com/globalsign/mgo" target="_blank" rel="noopener">mgo</a>，以前mgo维护者是个人，后来因为精力的原因将其移交给社区。<br>mgo我用过相当长的一段时间，这是一个非常好用的驱动，基本可以满足我的需求。它最大的问题就是更新不够及时，总是落后官方一到两个版本。移交给社区后有一定的改善，但是依然存在类似的问题。比如说在今年的6月份MongoDB 4.0的正式版已经发布了，但是到目前为止半年过去了，mgo对4.0的支持依然是试验性的。官方的驱动一般都会更新的更及时，新版本带来的特性也会支持的更好。<br>而在今年初，MongoDB官方公开了Go的官方驱动“<a href="https://github.com/mongodb/mongo-go-driver" target="_blank" rel="noopener">mongo-go-driver</a>”的Alpha 1版本。到目前为止已经是Alpha 18了，虽然已经迭代了18个版本，但是依然不建议在生产环境使用。不过这不妨碍我们试用它，并在未来恰当的时机导入到生产环境中。</p>
+        <h3 id="0-关于“mongo-go-driver”"><a href="#0-关于“mongo-go-driver”" class="headerlink" title="0. 关于“mongo-go-driver”"></a>0. 关于“mongo-go-driver”</h3><p>MongoDB一直缺乏官方的Go驱动库，官方仅做了社区驱动的推荐：<a href="https://docs.mongodb.com/ecosystem/drivers/community-supported-drivers/" target="_blank" rel="noopener">Community Supported Drivers Reference</a>。这其中Go驱动推荐的是<a href="https://github.com/globalsign/mgo" target="_blank" rel="noopener">mgo</a>，以前mgo维护者是个人，后来因为精力的原因将其移交给社区。<br>mgo我用过相当长的一段时间，这是一个非常好用的驱动，基本可以满足我的需求。它最大的问题就是更新不够及时，总是落后官方一到两个版本。移交给社区后有一定的改善，但是依然存在类似的问题。比如说在今年的6月份MongoDB 4.0的正式版已经发布了，但是到目前为止半年过去了，mgo对4.0的支持依然是试验性的。<br>官方的驱动一般都会更新的更及时，新版本带来的特性也会支持的更好。而在今年初，MongoDB官方公开了Go的官方驱动“<a href="https://github.com/mongodb/mongo-go-driver" target="_blank" rel="noopener">mongo-go-driver</a>”的Alpha 1版本。到目前为止已经是Alpha 18了，虽然已经迭代了18个版本，但是依然不建议在生产环境使用。不过这不妨碍我们试用它，并在未来恰当的时机导入到生产环境中。</p>
 <h3 id="1-演示"><a href="#1-演示" class="headerlink" title="1. 演示"></a>1. 演示</h3><h4 id="1-1-映射"><a href="#1-1-映射" class="headerlink" title="1.1. 映射"></a>1.1. 映射</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">	ID    objectid.ObjectID <span class="string">"_id,omitempty"</span></span><br><span class="line">	Name  <span class="keyword">string</span>	<span class="string">`bson:"dbname",json:"jsonname"`</span></span><br><span class="line">	Phone <span class="keyword">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>有三种规则：<br><a id="more"></a> </p>
 <ol>
